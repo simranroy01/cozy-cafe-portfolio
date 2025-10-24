@@ -37,54 +37,56 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-30 p-6">
-      {/* Desktop Menu Board */}
-      <div className="hidden md:block max-w-4xl mx-auto">
-        <div className="bg-wood/90 backdrop-blur-md rounded-lg px-8 py-4 shadow-lg border-4 border-coffee">
-          <div className="flex justify-between items-center">
-            <div className="font-bold text-coffee text-xl">☕️ Cozy Code Cafe</div>
-            <div className="flex gap-8 text-lg font-bold">
-              <button
-                onClick={() => scrollToSection('entrance')}
-                className={`chalk-text transition-all duration-300 ${
-                  activeSection === 'entrance' ? 'text-blush scale-110' : 'text-espresso hover:text-blush'
-                }`}
-              >
-                🏠 Entrance
-              </button>
-              <button
-                onClick={() => scrollToSection('projects')}
-                className={`chalk-text transition-all duration-300 ${
-                  activeSection === 'projects' ? 'text-blush scale-110' : 'text-espresso hover:text-blush'
-                }`}
-              >
-                🎂 Specials
-              </button>
-              <button
-                onClick={() => scrollToSection('skills')}
-                className={`chalk-text transition-all duration-300 ${
-                  activeSection === 'skills' ? 'text-blush scale-110' : 'text-espresso hover:text-blush'
-                }`}
-              >
-                ⚡ Brew Station
-              </button>
-              <button
-                onClick={() => scrollToSection('about')}
-                className={`chalk-text transition-all duration-300 ${
-                  activeSection === 'about' ? 'text-blush scale-110' : 'text-espresso hover:text-blush'
-                }`}
-              >
-                📖 Our Story
-              </button>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className={`chalk-text transition-all duration-300 ${
-                  activeSection === 'contact' ? 'text-blush scale-110' : 'text-espresso hover:text-blush'
-                }`}
-              >
-                📞 Order Here
-              </button>
-            </div>
+    <nav className="fixed top-0 left-0 right-0 z-30">
+      {/* Desktop Menu */}
+      <div className="hidden md:block bg-coffee px-8 h-16 shadow-2xl rounded-b-lg">
+        <div className="flex justify-between items-center h-full">
+          <div className="flex items-center gap-4">
+            <img src="/logo.svg" alt="Logo" className="h-10 w-10 rounded-full border-2 border-white shadow-md" />
+            <div className="font-bold text-white text-xl drop-shadow-lg">☕️ Cozy Code Cafe</div>
+          </div>
+          <div className="flex gap-8 text-lg font-bold h-full">
+            <button
+              onClick={() => scrollToSection('entrance')}
+              className={`transition-all duration-300 px-3 h-full ${
+                activeSection === 'entrance' ? 'text-blush bg-white/20' : 'text-white hover:bg-wood'
+              }`}
+            >
+              Entrance
+            </button>
+            <button
+              onClick={() => scrollToSection('projects')}
+              className={`transition-all duration-300 px-3 h-full ${
+                activeSection === 'projects' ? 'text-blush bg-white/20' : 'text-white hover:bg-wood'
+              }`}
+            >
+              Specials
+            </button>
+            <button
+              onClick={() => scrollToSection('skills')}
+              className={`transition-all duration-300 px-3 h-full ${
+                activeSection === 'skills' ? 'text-blush bg-white/20' : 'text-white hover:bg-wood'
+              }`}
+            >
+              Brew Station
+            </button>
+            <button
+              onClick={() => scrollToSection('about')}
+              className={`transition-all duration-300 px-3 h-full ${
+                activeSection === 'about' ? 'text-blush bg-white/20' : 'text-white hover:bg-wood'
+              }`}
+            >
+              My Story
+            </button>
+            <div className="w-8"></div> {/* Space between Our Story and Order Here */}
+            <button
+              onClick={() => scrollToSection('contact')}
+              className={`transition-all duration-300 px-3 h-full ${
+                activeSection === 'contact' ? 'text-blush bg-white/20' : 'text-white hover:bg-wood'
+              }`}
+            >
+              📞 Order Here
+            </button>
           </div>
         </div>
       </div>
