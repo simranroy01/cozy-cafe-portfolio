@@ -140,3 +140,31 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--coffee-brown);
 }
+
+/* Custom cursor for hero section */
+.hero-cursor {
+  cursor: url('/coffee-dry-grain-icon.png'), auto;
+}
+
+/* Shimmery particles for hero section */
+@keyframes particle-float {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.hero-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(139, 69, 19, 0.9) 0%, rgba(139, 69, 19, 0.3) 70%);
+  border-radius: 50%;
+  animation: particle-float 1.5s ease-out forwards;
+  pointer-events: none;
+  box-shadow: 0 0 6px rgba(139, 69, 19, 0.5);
+}

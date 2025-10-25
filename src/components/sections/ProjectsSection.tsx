@@ -1,7 +1,19 @@
 'use client';
+import { useState } from 'react';
 import { PROJECTS } from '@/lib/constants';
+import { Project } from '@/types';
 
 export default function ProjectsSection() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const openModal = (project: Project) => {
+    setSelectedProject(project);
+  };
+
+  const closeModal = () => {
+    setSelectedProject(null);
+  };
+
   return (
     <section id="projects" className="min-h-screen py-20 bg-cream">
       <div className="max-w-6xl mx-auto px-6">
@@ -17,7 +29,10 @@ export default function ProjectsSection() {
                   <div className="text-6xl mb-4">{project.emoji}</div>
                   <h3 className="text-xl font-bold text-coffee mb-2">{project.title}</h3>
                   <p className="text-milk-chocolate mb-4">{project.description}</p>
-                  <button className="bg-coffee text-cream px-4 py-2 rounded-lg hover:bg-espresso transition-colors">
+                  <button
+                    onClick={() => openModal(project)}
+                    className="bg-coffee text-cream px-4 py-2 rounded-lg hover:bg-espresso transition-colors"
+                  >
                     View Recipe
                   </button>
                 </div>
@@ -26,6 +41,90 @@ export default function ProjectsSection() {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {selectedProject && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-6xl w-full max-h-[80vh] overflow-y-auto">
+            <div className="flex justify-between items-start mb-6">
+              <div className="flex items-center">
+                <span className="text-4xl mr-4">{selectedProject.emoji}</span>
+                <h3 className="text-2xl font-bold text-coffee">{selectedProject.title}</h3>
+              </div>
+              <button
+                onClick={closeModal}
+                className="text-gray-500 hover:text-gray-700 text-2xl"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="mb-6">
+              <h4 className="text-lg font-semibold text-coffee mb-2">Ingredients:</h4>
+              <div className="flex flex-wrap gap-2">
+                {selectedProject.technologies.map((tech, index) => (
+                  <span
+                    key={index}
+                    className="bg-latte text-coffee px-3 py-1 rounded-full text-sm"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <h4 className="text-lg font-semibold text-coffee mb-2">Recipe:</h4>
+              <div className="text-milk-chocolate whitespace-pre-line">
+                {selectedProject.details}
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <h4 className="text-lg font-semibold text-coffee mb-2">Get it here:</h4>
+              <div className="text-milk-chocolate">
+                {selectedProject.link ? (
+                  <a
+                    href={selectedProject.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-coffee hover:text-espresso underline"
+                  >
+                    {selectedProject.link}
+                  </a>
+                ) : (
+                  'Link not available'
+                )}
+              </div>
+            </div>
+
+            {selectedProject.images && selectedProject.images.length > 0 && (
+              <div className="mb-6">
+                <h4 className="text-lg font-semibold text-coffee mb-2">Project Images:</h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {selectedProject.images.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`${selectedProject.title} screenshot ${index + 1}`}
+                      className="rounded-lg shadow-md border-2 border-wood"
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="flex justify-end">
+              <button
+                onClick={closeModal}
+                className="bg-coffee text-cream px-6 py-2 rounded-lg hover:bg-espresso transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

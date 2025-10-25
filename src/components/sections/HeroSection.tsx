@@ -20,16 +20,14 @@ interface HeroSectionProps {
 
 export default function HeroSection({ showTypewriter }: HeroSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const [hasLoaded, setHasLoaded] = useState(false);
+  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number }>>([]);
   const sectionRef = useRef<HTMLElement>(null);
+  const particleIdRef = useRef(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasLoaded) {
-          setIsVisible(true);
-          setHasLoaded(true);
-        }
+        setIsVisible(entry.isIntersecting);
       },
       { threshold: 0.1 }
     );
@@ -39,20 +37,67 @@ export default function HeroSection({ showTypewriter }: HeroSectionProps) {
     }
 
     return () => observer.disconnect();
-  }, [hasLoaded]);
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isVisible) return;
+
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Create multiple particles around the mouse position
+    const particleCount = 3;
+    const newParticles: Array<{ id: number; x: number; y: number }> = [];
+
+    for (let i = 0; i < particleCount; i++) {
+      const offsetX = (Math.random() - 0.5) * 20; // Random offset within 20px
+      const offsetY = (Math.random() - 0.5) * 20;
+
+      newParticles.push({
+        id: particleIdRef.current++,
+        x: x + offsetX,
+        y: y + offsetY,
+      });
+    }
+
+    setParticles(prev => [...prev, ...newParticles]);
+
+    // Remove particles after animation
+    newParticles.forEach(particle => {
+      setTimeout(() => {
+        setParticles(prev => prev.filter(p => p.id !== particle.id));
+      }, 1500);
+    });
+  };
 
   return (
     <section
       ref={sectionRef}
       id="entrance"
-      className="min-h-screen flex items-center justify-center relative"
+      className="min-h-screen flex items-center justify-center relative hero-cursor"
+      onMouseMove={handleMouseMove}
     >
       {isVisible ? (
-        <Spline
-          scene="https://prod.spline.design/t864ZnQlVVdW8FrC/scene.splinecode"
-          onLoad={() => console.log('Spline loaded!')}
-          onError={(error) => console.error('Spline error:', error)}
-        />
+        <div className="relative w-full h-full">
+          <Spline
+            scene="https://prod.spline.design/t864ZnQlVVdW8FrC/scene.splinecode"
+            onLoad={() => console.log('Spline loaded!')}
+            onError={(error) => console.error('Spline error:', error)}
+          />
+          {particles.map(particle => (
+            <div
+              key={particle.id}
+              className="hero-particle"
+              style={{
+                left: `${particle.x}px`,
+                top: `${particle.y}px`,
+              }}
+            />
+          ))}
+        </div>
       ) : (
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">

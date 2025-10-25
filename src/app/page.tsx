@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Navigation from '@/components/ui/navigation';
 import HeroSection from '@/components/sections/HeroSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
-
+import SkillsSection from '@/components/sections/SkillsSection';
 import AboutSection from '@/components/sections/AboutSection';
 import ContactSection from '@/components/sections/ContactSection';
 import FloatingParticles from '@/components/animations/FloatingParticles';
@@ -72,6 +72,7 @@ export default function Home() {
           <main>
             <HeroSection showTypewriter={showTypewriter} />
             <ProjectsSection />
+            <SkillsSection />
             <AboutSection />
             <ContactSection />
           </main>

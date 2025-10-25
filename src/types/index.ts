@@ -8,6 +8,8 @@ export interface Project {
   gradient: string;
   technologies: string[];
   details: string;
+  link?: string;
+  images?: string[];
 }
 
 export interface Skill {

@@ -1,10 +1,39 @@
 'use client';
+import { useEffect, useRef } from 'react';
 import { SKILLS } from '@/lib/constants';
 
 export default function SkillsSection() {
+  const vantaRef = useRef<HTMLDivElement>(null);
+  const vantaEffect = useRef<any>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && vantaRef.current) {
+      import('vanta/dist/vanta.waves.min').then((VANTA) => {
+        vantaEffect.current = VANTA.default({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          color: 0xffffff, // White color for cream/milk effect
+          shininess: 30,
+          waveHeight: 15,
+          waveSpeed: 0.8,
+          zoom: 1.1
+        });
+      });
+    }
+
+    return () => {
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+      }
+    };
+  }, []);
+
   return (
-    <section id="skills" className="min-h-screen py-20 bg-wood">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="skills" className="min-h-screen py-20 bg-wood relative">
+      <div ref={vantaRef} className="absolute inset-0"></div>
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-cream mb-16">
           My Brewing Station ☕️
         </h2>

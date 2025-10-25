@@ -42,8 +42,8 @@ export default function Navigation() {
       <div className="hidden md:block bg-coffee px-8 h-16 shadow-2xl rounded-b-lg">
         <div className="flex justify-between items-center h-full">
           <div className="flex items-center gap-4">
-            <img src="/logo.svg" alt="Logo" className="h-10 w-10 rounded-full border-2 border-white shadow-md" />
-            <div className="font-bold text-white text-xl drop-shadow-lg">☕️ Cozy Code Cafe</div>
+            <img src="/coffee-logo.png" alt="Coffee Logo" className="h-12 w-12 shadow-md" />
+            <div className="font-bold text-white text-xl drop-shadow-lg">Cozy Code Cafe</div>
           </div>
           <div className="flex gap-8 text-lg font-bold h-full">
             <button
