@@ -143,7 +143,7 @@ html {
 
 /* Custom cursor for hero section */
 .hero-cursor {
-  cursor: url('/coffee-dry-grain-icon.png'), auto;
+  cursor: url('/coffee-dry-grain-icon.png') 16 16, auto;
 }
 
 /* Shimmery particles for hero section */

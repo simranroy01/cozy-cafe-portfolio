@@ -54,3 +54,10 @@ export interface CafeColors {
   espresso: string;
   'milk-chocolate': string;
 }
+
+// Global THREE.js declaration for Vanta
+declare global {
+  interface Window {
+    THREE: any;
+  }
+}

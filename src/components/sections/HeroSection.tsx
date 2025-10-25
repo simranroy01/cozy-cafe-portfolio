@@ -81,7 +81,7 @@ export default function HeroSection({ showTypewriter }: HeroSectionProps) {
       onMouseMove={handleMouseMove}
     >
       {isVisible ? (
-        <div className="relative w-full h-full">
+        <div className="relative w-full h-full hero-cursor">
           <Spline
             scene="https://prod.spline.design/t864ZnQlVVdW8FrC/scene.splinecode"
             onLoad={() => console.log('Spline loaded!')}
