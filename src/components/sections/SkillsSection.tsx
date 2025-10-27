@@ -53,7 +53,7 @@ export default function SkillsSection() {
   };
 
   return (
-    <section id="skills" ref={sectionRef} className="min-h-screen relative">
+    <section id="skills" ref={sectionRef} className="min-h-screen relative section-transition">
       {isVisible && (
         <div onClick={handleSplineClick} className="cursor-pointer">
           <Spline

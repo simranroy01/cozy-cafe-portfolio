@@ -1,10 +1,13 @@
 'use client';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { PROJECTS } from '@/lib/constants';
 import { Project } from '@/types';
+import Spline from '@splinetool/react-spline';
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const openModal = (project: Project) => {
     setSelectedProject(project);
@@ -14,9 +17,38 @@ export default function ProjectsSection() {
     setSelectedProject(null);
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section id="projects" className="min-h-screen py-20 bg-cream">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="projects" ref={sectionRef} className="min-h-screen py-20 bg-cream relative section-transition">
+      {/* Spline Background */}
+      {isVisible && (
+        <div className="absolute inset-0 z-0">
+          <Spline
+            scene="https://prod.spline.design/TNgaXsy1mJfTPqoj/scene.splinecode"
+            style={{ width: '100%', height: '100%' }}
+          />
+        </div>
+      )}
+
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-coffee mb-16">
           Today&apos;s Specials 🍰
         </h2>

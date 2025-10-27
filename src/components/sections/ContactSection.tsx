@@ -24,7 +24,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="min-h-screen py-20 bg-coffee">
+    <section id="contact" className="min-h-screen py-20 bg-coffee section-transition">
       <div className="max-w-4xl mx-auto px-6">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-cream mb-16">
           Place Your Order 📝

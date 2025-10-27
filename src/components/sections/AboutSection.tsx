@@ -3,7 +3,7 @@ import { TIMELINE_EVENTS, PERSONALITY_TRAITS } from '@/lib/constants';
 
 export default function AboutSection() {
   return (
-    <section id="about" className="min-h-screen py-20 bg-latte">
+    <section id="about" className="min-h-screen py-20 bg-latte section-transition">
       <div className="max-w-6xl mx-auto px-6">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-coffee mb-16">
           Our Story 📖

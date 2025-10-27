@@ -1,6 +1,6 @@
 // app/page.tsx - Main Home Page
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navigation from '@/components/ui/navigation';
 import HeroSection from '@/components/sections/HeroSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
@@ -15,6 +15,7 @@ export default function Home() {
   const [splineLoaded, setSplineLoaded] = useState(false);
   const [animationFinished, setAnimationFinished] = useState(false);
   const [showTypewriter, setShowTypewriter] = useState(false);
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
 
   const handleEnterCafe = () => {
     setShowIntro(false);
@@ -23,13 +24,42 @@ export default function Home() {
 
   useEffect(() => {
     if (splineLoaded) {
-      // Wait for the door animation to finish (assuming 5 seconds based on typical animation length)
+      // Wait for the door animation to finish (assuming 4 seconds based on typical animation length)
       const timer = setTimeout(() => {
         setAnimationFinished(true);
-      }, 5000);
+      }, 4000);
       return () => clearTimeout(timer);
     }
   }, [splineLoaded]);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '-100px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const sectionId = entry.target.id;
+        if (entry.isIntersecting) {
+          setVisibleSections(prev => new Set([...prev, sectionId]));
+        } else {
+          // Remove from visible sections when scrolling out of view
+          setVisibleSections(prev => {
+            const newSet = new Set(prev);
+            newSet.delete(sectionId);
+            return newSet;
+          });
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach(section => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [showIntro]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-latte to-blush relative overflow-x-hidden">
@@ -71,10 +101,34 @@ export default function Home() {
 
           <main>
             <HeroSection showTypewriter={showTypewriter} />
-            <ProjectsSection />
-            <SkillsSection />
-            <AboutSection />
-            <ContactSection />
+
+            {/* Section Divider */}
+            <div className="section-divider"></div>
+
+            <div className={`section-slide-up ${visibleSections.has('projects') ? 'animate' : ''}`}>
+              <ProjectsSection />
+            </div>
+
+            {/* Section Divider */}
+            <div className="section-divider"></div>
+
+            <div className={`section-slide-up ${visibleSections.has('skills') ? 'animate' : ''}`}>
+              <SkillsSection />
+            </div>
+
+            {/* Section Divider */}
+            <div className="section-divider"></div>
+
+            <div className={`section-slide-up ${visibleSections.has('about') ? 'animate' : ''}`}>
+              <AboutSection />
+            </div>
+
+            {/* Section Divider */}
+            <div className="section-divider"></div>
+
+            <div className={`section-slide-up ${visibleSections.has('contact') ? 'animate' : ''}`}>
+              <ContactSection />
+            </div>
           </main>
         </>
       )}
