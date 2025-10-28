@@ -34,9 +34,12 @@ export const PROJECTS = [
 • Crafted dynamic UI components (responsive recipe cards, star-rating & save features, animations) and optimized performance with server-side rendering, lazy loading, and responsive layouts for seamless cross-device experiences.`,
     link: 'https://smart-recipe-generator-zeta.vercel.app/',
     images: [
-      '/project-images/smart-recipe-1.png',
-      '/project-images/smart-recipe-2.png',
-      '/project-images/smart-recipe-3.png',
+      '/srg1.png',
+      '/srg2.png',
+      '/srg3.png',
+      '/srg4.png',
+      '/srg5.png',
+      '/srg6.png',
     ],
   },
   {
@@ -61,9 +64,8 @@ export const PROJECTS = [
 • Used Tesseract OCR for text extraction and Microsoft Table Transformer for structured table recognition with 85%+ precision, and deployed via Gradio web app with drag-and-drop PDF uploads.`,
     link: 'https://github.com/simranroy01/SmartDoc-Summarizer',
     images: [
-      '/project-images/smartdoc-1.png',
-      '/project-images/smartdoc-2.png',
-      '/project-images/smartdoc-3.png',
+      'sd1.jpg',
+      'sd2.jpg',
     ],
   },
   {
@@ -87,9 +89,11 @@ export const PROJECTS = [
 • Designed and deployed an underwater object detection module using CNN and OpenCV, automating marine debris detection and infrastructure inspection with 70% improved detection accuracy vs manual review.`,
     link: 'https://github.com/simranroy01/AQUAVISION',
     images: [
-      '/project-images/water-monitoring-1.png',
-      '/project-images/water-monitoring-2.png',
-      '/project-images/water-monitoring-3.png',
+      'aq1.png',
+      'aq2.png',
+      'aq3.png',
+      'aq4.png',
+      'aq5.png',
     ],
   },
   {
@@ -138,9 +142,7 @@ export const PROJECTS = [
 • Optimized large models with 4-bit quantization, enabling real-time inference and reducing GPU memory usage by 60%.`,
     link: 'https://github.com/simranroy01/multimodal_llava_bot',
     images: [
-      '/project-images/multimodal-ai-1.png',
-      '/project-images/multimodal-ai-2.png',
-      '/project-images/multimodal-ai-3.png',
+      '/llava.jpg',
     ],
   },
   {
