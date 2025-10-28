@@ -186,23 +186,33 @@ export const SKILLS = [
 export const TIMELINE_EVENTS = [
   {
     year: '2020',
-    title: 'First Brew',
-    description: 'Started my coding journey with HTML & CSS',
-  },
-  {
-    year: '2021',
-    title: 'Barista Training',
-    description: 'Completed Full-Stack Bootcamp',
+    title: 'The First Brew',
+    description: 'Discovered coding with HTML, CSS, and JavaScript in 11th grade. My love for interactive designs began here.',
   },
   {
     year: '2022',
-    title: 'Opening Day',
-    description: 'First professional development role',
+    title: 'The Fresh Pour',
+    description: 'Enrolled at VIT. Deepened knowledge in data structures and problem-solving.',
   },
   {
     year: '2023',
-    title: 'Specialty Drinks',
-    description: 'Mastered React, Node.js & cloud technologies',
+    title: 'The Perfect Grind',
+    description: 'Joined tech clubs and outreach programs. Explored robotics and AI/ML, learned the value of teamwork.',
+  },
+  {
+    year: '2024',
+    title: 'The Bold Roast',
+    description: 'Experimented with larger projects and web applications. Refined logic and creativity through late-night debugging.',
+  },
+  {
+    year: '2025',
+    title: 'The Signature Blend',
+    description: 'Interned as a developer, building projects with design, data, and real-world impact.',
+  },
+  {
+    year: '2026',
+    title: 'The Final Drip (for now)',
+    description: 'Graduating soon with experiences, lessons, and code. Ready to pour into what comes next.',
   },
 ];
 
@@ -214,10 +224,9 @@ export const PERSONALITY_TRAITS = [
 ];
 
 export const SOCIAL_LINKS = [
-  { name: 'GitHub', emoji: '🐙', url: '#' },
-  { name: 'LinkedIn', emoji: '💼', url: '#' },
-  { name: 'Twitter', emoji: '🐦', url: '#' },
-  { name: 'Email', emoji: '📧', url: '#' },
+  { name: 'GitHub', emoji: '🐙', url: 'https://github.com/simranroy01' },
+  { name: 'LinkedIn', emoji: '💼', url: 'https://www.linkedin.com/in/simran-roy-/' },
+  { name: 'Email', emoji: '📧', url: 'mailto:simranroy01@gmail.com' },
 ];
 
 export const NAVIGATION_SECTIONS = [

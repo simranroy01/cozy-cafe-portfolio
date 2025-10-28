@@ -4,27 +4,34 @@ import { TIMELINE_EVENTS, PERSONALITY_TRAITS } from '@/lib/constants';
 export default function AboutSection() {
   return (
     <section id="about" className="min-h-screen py-20 bg-latte section-transition">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-4xl md:text-5xl font-bold text-center text-coffee mb-16">
-          Our Story 📖
+          My Story
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
           {/* Timeline */}
-          <div className="space-y-6">
+          <div className="relative">
             <h3 className="text-2xl font-bold text-coffee mb-6">Coffee Stain Timeline</h3>
-            {TIMELINE_EVENTS.map((event, index) => (
-              <div key={event.year} className="flex items-center space-x-4 group">
-                <div className="w-16 h-16 bg-coffee rounded-full flex items-center justify-center text-cream font-bold group-hover:animate-pulse">
-                  {event.year}
+            <div className="space-y-8">
+              {TIMELINE_EVENTS.map((event, index) => (
+                <div key={event.year} className="flex items-start space-x-4 group animate-fadeInUp" style={{ animationDelay: `${index * 0.3}s` }}>
+                  <div className="flex flex-col items-center">
+                    <div className="w-16 h-16 bg-coffee rounded-full flex items-center justify-center text-cream font-bold group-hover:animate-pulse z-10">
+                      {event.year}
+                    </div>
+                    {index < TIMELINE_EVENTS.length - 1 && (
+                      <div className="w-1 h-8 bg-wood mt-2"></div>
+                    )}
+                  </div>
+                  <div className="bg-cream p-4 rounded-lg shadow-md border-2 border-wood flex-1 group-hover:shadow-lg transition-shadow">
+                    <h4 className="font-bold text-coffee">{event.title}</h4>
+                    <p className="text-milk-chocolate">{event.description}</p>
+                  </div>
                 </div>
-                <div className="bg-cream p-4 rounded-lg shadow-md border-2 border-wood flex-1 group-hover:shadow-lg transition-shadow">
-                  <h4 className="font-bold text-coffee">{event.title}</h4>
-                  <p className="text-milk-chocolate">{event.description}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           {/* Personality Traits */}

@@ -94,6 +94,18 @@ body {
   }
 }
 
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
 .steam-particle {
   animation: steam 3s ease-out infinite;
 }
@@ -123,11 +135,22 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Scroll-triggered slide-up animations */
+/* Scroll-triggered slide animations */
 @keyframes slideUp {
   from {
     opacity: 0;
     transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
   }
   to {
     opacity: 1;
@@ -143,6 +166,16 @@ html {
 
 .section-slide-up.animate {
   animation: slideUp 1s ease-out forwards;
+}
+
+.section-slide-down {
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.section-slide-down.animate {
+  animation: slideDown 1s ease-out forwards;
 }
 
 /* Custom scrollbar */
@@ -219,4 +252,22 @@ html {
     var(--cream) 50%,
     var(--wood) 100%);
   overflow: hidden;
+  z-index: 10;
+}
+
+/* Smooth section transitions */
+.section-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  z-index: -1;
 }

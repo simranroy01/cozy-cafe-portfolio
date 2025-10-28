@@ -6,14 +6,36 @@ export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    projectType: '',
     message: ''
   });
+  const [notification, setNotification] = useState({ show: false, message: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('message', formData.message);
+
+      const response = await fetch('https://getform.io/f/bmdylmna', {
+        method: 'POST',
+        body: formDataToSend,
+      });
+
+      if (response.ok) {
+        setNotification({ show: true, message: 'Order placed! Thank you for your interest!' });
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setNotification({ show: false, message: '' }), 5000);
+      } else {
+        setNotification({ show: true, message: 'Failed to send message. Please try again.' });
+        setTimeout(() => setNotification({ show: false, message: '' }), 5000);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -45,7 +67,7 @@ export default function ContactSection() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full p-3 border-2 border-wood rounded-lg bg-white focus:border-coffee focus:outline-none"
+                    className="w-full p-3 border-2 border-wood rounded-lg bg-white text-coffee focus:border-coffee focus:outline-none"
                     placeholder="John Doe"
                     required
                   />
@@ -57,29 +79,14 @@ export default function ContactSection() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full p-3 border-2 border-wood rounded-lg bg-white focus:border-coffee focus:outline-none"
+                    className="w-full p-3 border-2 border-wood rounded-lg bg-white text-coffee focus:border-coffee focus:outline-none"
                     placeholder="john@example.com"
                     required
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-coffee font-semibold mb-2">Project Type</label>
-                <select
-                  name="projectType"
-                  value={formData.projectType}
-                  onChange={handleChange}
-                  className="w-full p-3 border-2 border-wood rounded-lg bg-white focus:border-coffee focus:outline-none"
-                  required
-                >
-                  <option value="">Select a project type</option>
-                  <option value="web-app">Web Application</option>
-                  <option value="mobile-app">Mobile App</option>
-                  <option value="ui-ux">UI/UX Design</option>
-                  <option value="consultation">Just saying hi! 👋</option>
-                </select>
-              </div>
+
 
               <div>
                 <label className="block text-coffee font-semibold mb-2">Message</label>
@@ -88,7 +95,7 @@ export default function ContactSection() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full p-3 border-2 border-wood rounded-lg bg-white focus:border-coffee focus:outline-none resize-none"
+                  className="w-full p-3 border-2 border-wood rounded-lg bg-white text-coffee focus:border-coffee focus:outline-none resize-none"
                   placeholder="Tell me about your project..."
                   required
                 />
@@ -98,29 +105,40 @@ export default function ContactSection() {
                 type="submit"
                 className="w-full bg-coffee text-cream py-3 px-6 rounded-lg font-bold hover:bg-espresso transition-colors"
               >
-                ☕️ Place Order
+                Place Order
               </button>
             </form>
           </div>
 
           {/* Social Links */}
           <div className="text-center">
-            <h3 className="text-xl font-bold text-cream mb-6">Find Me Online</h3>
-            <div className="flex justify-center gap-4">
+            <h3 className="text-xl font-bold text-cream mb-6">Connect With Me</h3>
+            <div className="flex justify-center gap-6">
               {SOCIAL_LINKS.map((social) => (
                 <a
                   key={social.name}
                   href={social.url}
-                  className="bg-cream text-coffee px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center gap-2"
+                  className="bg-cream text-coffee p-3 rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center justify-center"
+                  aria-label={social.name}
                 >
-                  <span>{social.emoji}</span>
-                  <span className="font-semibold">{social.name}</span>
+                  <img
+                    src={`/${social.name.toLowerCase()}.svg`}
+                    alt={social.name}
+                    className="w-6 h-6"
+                  />
                 </a>
               ))}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Notification */}
+      {notification.show && (
+        <div className="fixed bottom-4 right-4 bg-coffee text-cream px-6 py-3 rounded-lg shadow-lg border-2 border-wood animate-fadeInUp">
+          {notification.message}
+        </div>
+      )}
     </section>
   );
 }
