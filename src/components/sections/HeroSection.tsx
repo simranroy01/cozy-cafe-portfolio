@@ -91,7 +91,7 @@ export default function HeroSection({ showTypewriter }: HeroSectionProps) {
         <div className="relative w-full h-full hero-cursor">
           {mobile ? (
             // Mobile fallback: Static image
-            <div className="w-full h-screen flex flex-col items-center justify-between pt-24 pb-8 bg-gradient-to-br from-latte to-blush">
+            <div className="w-full h-screen flex flex-col items-center justify-between pt-30 pb-15 bg-gradient-to-br from-latte to-blush">
               <div className="text-center">
                 <Image
                   src="/hero-spline-fallback.png"
