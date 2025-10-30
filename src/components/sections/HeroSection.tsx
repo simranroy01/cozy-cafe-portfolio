@@ -91,7 +91,7 @@ export default function HeroSection({ showTypewriter }: HeroSectionProps) {
         <div className="relative w-full h-full hero-cursor">
           {mobile ? (
             // Mobile fallback: Static image
-            <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-latte to-blush">
+            <div className="w-full h-screen flex flex-col items-center justify-start pt-16 bg-gradient-to-br from-latte to-blush">
               <div className="text-center">
                 <Image
                   src="/hero-spline-fallback.png"
@@ -103,6 +103,12 @@ export default function HeroSection({ showTypewriter }: HeroSectionProps) {
                 />
                 <p className="text-xl font-semibold text-coffee mt-4">Welcome to the Cozy Code Cafe</p>
                 <p className="text-sm text-milk-chocolate mt-2">3D Experience available on desktop</p>
+                <p className="text-lg font-medium text-coffee mt-6">Scroll down</p>
+                <div className="mt-4 animate-bounce">
+                  <svg className="w-8 h-8 text-coffee mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </div>
               </div>
             </div>
           ) : (
