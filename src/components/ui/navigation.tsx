@@ -117,7 +117,7 @@ export default function Navigation() {
             <div className="flex flex-col gap-4 text-lg font-bold">
               <button
                 onClick={() => scrollToSection('entrance')}
-                className={`text-left transition-all duration-300 font-sans font-semibold ${
+                className={`chalk-text text-left transition-all duration-300 ${
                   activeSection === 'entrance' ? 'text-blush scale-105' : 'text-espresso hover:text-blush'
                 }`}
               >
@@ -125,7 +125,7 @@ export default function Navigation() {
               </button>
               <button
                 onClick={() => scrollToSection('projects')}
-                className={`text-left transition-all duration-300 font-sans font-semibold ${
+                className={`chalk-text text-left transition-all duration-300 ${
                   activeSection === 'projects' ? 'text-blush scale-105' : 'text-espresso hover:text-blush'
                 }`}
               >
@@ -133,7 +133,7 @@ export default function Navigation() {
               </button>
               <button
                 onClick={() => scrollToSection('skills')}
-                className={`text-left transition-all duration-300 font-sans font-semibold ${
+                className={`chalk-text text-left transition-all duration-300 ${
                   activeSection === 'skills' ? 'text-blush scale-105' : 'text-espresso hover:text-blush'
                 }`}
               >
@@ -141,7 +141,7 @@ export default function Navigation() {
               </button>
               <button
                 onClick={() => scrollToSection('about')}
-                className={`text-left transition-all duration-300 font-sans font-semibold ${
+                className={`chalk-text text-left transition-all duration-300 ${
                   activeSection === 'about' ? 'text-blush scale-105' : 'text-espresso hover:text-blush'
                 }`}
               >
@@ -149,7 +149,7 @@ export default function Navigation() {
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
-                className={`text-left transition-all duration-300 font-sans font-semibold ${
+                className={`chalk-text text-left transition-all duration-300 ${
                   activeSection === 'contact' ? 'text-blush scale-105' : 'text-espresso hover:text-blush'
                 }`}
               >
