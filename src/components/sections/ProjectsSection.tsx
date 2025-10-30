@@ -3,12 +3,22 @@ import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { PROJECTS } from '@/lib/constants';
 import { Project } from '@/types';
-import Spline from '@splinetool/react-spline';
+import dynamic from 'next/dynamic';
+import { isMobile } from '@/lib/constants';
+
+const Spline = dynamic(() => import('@splinetool/react-spline'), {
+  ssr: false,
+});
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    setMobile(isMobile());
+  }, []);
 
   const openModal = (project: Project) => {
     setSelectedProject(project);
@@ -43,10 +53,24 @@ export default function ProjectsSection() {
       {/* Spline Background */}
       {isVisible && (
         <div className="absolute inset-0 z-0">
-          <Spline
-            scene="https://prod.spline.design/TNgaXsy1mJfTPqoj/scene.splinecode"
-            style={{ width: '100%', height: '100%' }}
-          />
+          {mobile ? (
+            // Mobile fallback: Static image background
+            <div className="w-full h-full relative">
+              <Image
+                src="/projects-spline-fallback.png"
+                alt="Projects Section Background"
+                fill
+                className="object-cover opacity-30"
+                priority
+              />
+            </div>
+          ) : (
+            // Desktop: Spline 3D background
+            <Spline
+              scene="https://prod.spline.design/TNgaXsy1mJfTPqoj/scene.splinecode"
+              style={{ width: '100%', height: '100%' }}
+            />
+          )}
         </div>
       )}
 

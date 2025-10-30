@@ -13,6 +13,12 @@ export const CAFE_COLORS = {
   'milk-chocolate': '#D2691E',
 } as const;
 
+// Mobile detection utility
+export const isMobile = () => {
+  if (typeof window === 'undefined') return false;
+  return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
 export const PROJECTS = [
   {
     id: 1,

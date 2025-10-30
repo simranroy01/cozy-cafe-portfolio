@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import { isMobile } from '@/lib/constants';
 
 const Spline = dynamic(() => import('@splinetool/react-spline'), {
   ssr: false,
@@ -18,6 +20,11 @@ export default function SkillsSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    setMobile(isMobile());
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -57,11 +64,30 @@ export default function SkillsSection() {
     <section id="skills" ref={sectionRef} className="min-h-screen relative section-transition">
       {isVisible && (
         <div onClick={handleSplineClick} className="cursor-pointer">
-          <Spline
-            scene="https://prod.spline.design/WHECGbwEOlRbCwXz/scene.splinecode"
-            onLoad={() => console.log('Spline loaded!')}
-            onError={(error) => console.error('Spline error:', error)}
-          />
+          {mobile ? (
+            // Mobile fallback: Static image
+            <div className="min-h-screen flex items-center justify-center bg-wood">
+              <div className="text-center">
+                <Image
+                  src="/skills-spline-fallback.png"
+                  alt="Skills Section - Coffee Station"
+                  width={800}
+                  height={600}
+                  className="rounded-lg shadow-2xl max-w-full h-auto"
+                  priority
+                />
+                <p className="text-xl font-semibold text-cream mt-4">Click to download resume</p>
+                <p className="text-sm text-latte mt-2">3D Experience available on desktop</p>
+              </div>
+            </div>
+          ) : (
+            // Desktop: Spline 3D model
+            <Spline
+              scene="https://prod.spline.design/WHECGbwEOlRbCwXz/scene.splinecode"
+              onLoad={() => console.log('Spline loaded!')}
+              onError={(error) => console.error('Spline error:', error)}
+            />
+          )}
         </div>
       )}
 

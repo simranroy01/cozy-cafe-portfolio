@@ -1,6 +1,8 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import { isMobile } from '@/lib/constants';
 
 const Spline = dynamic(() => import('@splinetool/react-spline'), {
   ssr: false,
@@ -23,6 +25,11 @@ export default function HeroSection({ showTypewriter }: HeroSectionProps) {
   const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number }>>([]);
   const sectionRef = useRef<HTMLElement>(null);
   const particleIdRef = useRef(0);
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    setMobile(isMobile());
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,7 +47,7 @@ export default function HeroSection({ showTypewriter }: HeroSectionProps) {
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isVisible) return;
+    if (!isVisible || mobile) return;
 
     const rect = sectionRef.current?.getBoundingClientRect();
     if (!rect) return;
@@ -82,12 +89,31 @@ export default function HeroSection({ showTypewriter }: HeroSectionProps) {
     >
       {isVisible ? (
         <div className="relative w-full h-full hero-cursor">
-          <Spline
-            scene="https://prod.spline.design/t864ZnQlVVdW8FrC/scene.splinecode"
-            onLoad={() => console.log('Spline loaded!')}
-            onError={(error) => console.error('Spline error:', error)}
-          />
-          {particles.map(particle => (
+          {mobile ? (
+            // Mobile fallback: Static image
+            <div className="w-full h-screen flex items-center justify-center bg-gradient-to-br from-latte to-blush">
+              <div className="text-center">
+                <Image
+                  src="/hero-spline-fallback.png"
+                  alt="Cozy Cafe Entrance"
+                  width={800}
+                  height={600}
+                  className="rounded-lg shadow-2xl max-w-full h-auto"
+                  priority
+                />
+                <p className="text-xl font-semibold text-coffee mt-4">Welcome to the Cozy Code Cafe</p>
+                <p className="text-sm text-milk-chocolate mt-2">3D Experience available on desktop</p>
+              </div>
+            </div>
+          ) : (
+            // Desktop: Spline 3D model
+            <Spline
+              scene="https://prod.spline.design/t864ZnQlVVdW8FrC/scene.splinecode"
+              onLoad={() => console.log('Spline loaded!')}
+              onError={(error) => console.error('Spline error:', error)}
+            />
+          )}
+          {!mobile && particles.map(particle => (
             <div
               key={particle.id}
               className="hero-particle"

@@ -9,6 +9,8 @@ import AboutSection from '@/components/sections/AboutSection';
 import ContactSection from '@/components/sections/ContactSection';
 import FloatingParticles from '@/components/animations/FloatingParticles';
 import Spline from '@splinetool/react-spline';
+import Image from 'next/image';
+import { isMobile } from '@/lib/constants';
 
 // WebGL support detection
 const checkWebGLSupport = () => {
@@ -35,6 +37,11 @@ export default function Home() {
   const [webGLSupported, setWebGLSupported] = useState<boolean | null>(null);
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
   const lastScrollY = useRef(0);
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    setMobile(isMobile());
+  }, []);
 
   const handleEnterCafe = () => {
     setShowIntro(false);
@@ -103,47 +110,77 @@ export default function Home() {
       {/* Spline Door Animation - Full Page Intro */}
       {showIntro && (
         <div className="fixed inset-0 z-50 bg-gradient-to-br from-amber-50 to-rose-50 flex items-center justify-center">
-          {webGLSupported ? (
-            <Spline
-              scene="https://prod.spline.design/6R2z2MmAPgz7Pes4/scene.splinecode"
-              onLoad={() => {
-                console.log('Spline loaded!');
-                setSplineLoaded(true);
-              }}
-              onError={(error) => console.error('Spline error:', error)}
-            />
-          ) : (
+          {mobile ? (
+            // Mobile fallback: Static image
             <div className="absolute inset-0 flex flex-col items-center justify-center text-coffee">
-              <div className="text-6xl mb-4 animate-bounce">☕</div>
-              <p className="text-xl font-semibold">Welcome to the Cafe</p>
-              <p className="text-sm mt-2 opacity-75">3D Experience Unavailable</p>
-            </div>
-          )}
-          {!splineLoaded && webGLSupported && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-coffee">
-              <div className="text-6xl mb-4 animate-bounce">☕</div>
-              <p className="text-xl font-semibold">Brewing the portfolio</p>
-            </div>
-          )}
-          {animationFinished && webGLSupported && (
-            <div className="absolute bottom-0.5 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10">
-              <div onClick={handleEnterCafe} className="cursor-pointer p-4 rounded-lg">
-                <Spline
-                  scene="https://prod.spline.design/zjkItZ7d3Mg5KA-1/scene.splinecode"
-                  style={{ width: '800px', height: '550px', backgroundColor: '#e0e0e0' }}
-                />
+              <Image
+                src="/intro-spline-fallback.png"
+                alt="Cozy Cafe Door"
+                width={800}
+                height={600}
+                className="rounded-lg shadow-2xl max-w-full h-auto mb-8"
+                priority
+              />
+              <div className="text-center">
+                <div className="text-6xl mb-4 animate-bounce">☕</div>
+                <p className="text-xl font-semibold">Welcome to the Cafe</p>
+                <p className="text-sm mt-2 opacity-75">3D Experience available on desktop</p>
+              </div>
+              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10">
+                <button
+                  onClick={handleEnterCafe}
+                  className="cursor-pointer p-4 rounded-lg bg-coffee text-white font-semibold hover:bg-opacity-80 transition-colors"
+                >
+                  Enter Cafe
+                </button>
               </div>
             </div>
-          )}
-          {animationFinished && !webGLSupported && (
-            <div className="absolute bottom-0.5 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10">
-              <button
-                onClick={handleEnterCafe}
-                className="cursor-pointer p-4 rounded-lg bg-coffee text-white font-semibold hover:bg-opacity-80 transition-colors"
-              >
-                Enter Cafe
-              </button>
-            </div>
+          ) : (
+            // Desktop: Original Spline logic
+            <>
+              {webGLSupported ? (
+                <Spline
+                  scene="https://prod.spline.design/6R2z2MmAPgz7Pes4/scene.splinecode"
+                  onLoad={() => {
+                    console.log('Spline loaded!');
+                    setSplineLoaded(true);
+                  }}
+                  onError={(error) => console.error('Spline error:', error)}
+                />
+              ) : (
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-coffee">
+                  <div className="text-6xl mb-4 animate-bounce">☕</div>
+                  <p className="text-xl font-semibold">Welcome to the Cafe</p>
+                  <p className="text-sm mt-2 opacity-75">3D Experience Unavailable</p>
+                </div>
+              )}
+              {!splineLoaded && webGLSupported && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-coffee">
+                  <div className="text-6xl mb-4 animate-bounce">☕</div>
+                  <p className="text-xl font-semibold">Brewing the portfolio</p>
+                </div>
+              )}
+              {animationFinished && webGLSupported && (
+                <div className="absolute bottom-0.5 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10">
+                  <div onClick={handleEnterCafe} className="cursor-pointer p-4 rounded-lg">
+                    <Spline
+                      scene="https://prod.spline.design/zjkItZ7d3Mg5KA-1/scene.splinecode"
+                      style={{ width: '800px', height: '550px', backgroundColor: '#e0e0e0' }}
+                    />
+                  </div>
+                </div>
+              )}
+              {animationFinished && !webGLSupported && (
+                <div className="absolute bottom-0.5 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-10">
+                  <button
+                    onClick={handleEnterCafe}
+                    className="cursor-pointer p-4 rounded-lg bg-coffee text-white font-semibold hover:bg-opacity-80 transition-colors"
+                  >
+                    Enter Cafe
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       )}
