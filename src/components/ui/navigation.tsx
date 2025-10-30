@@ -117,43 +117,43 @@ export default function Navigation() {
             <div className="flex flex-col gap-4 text-lg font-bold">
               <button
                 onClick={() => scrollToSection('entrance')}
-                className={`chalk-text text-left transition-all duration-300 ${
+                className={`text-left transition-all duration-300 font-sans font-semibold ${
                   activeSection === 'entrance' ? 'text-blush scale-105' : 'text-espresso hover:text-blush'
                 }`}
               >
-                🏠 Entrance
+                Entrance
               </button>
               <button
                 onClick={() => scrollToSection('projects')}
-                className={`chalk-text text-left transition-all duration-300 ${
+                className={`text-left transition-all duration-300 font-sans font-semibold ${
                   activeSection === 'projects' ? 'text-blush scale-105' : 'text-espresso hover:text-blush'
                 }`}
               >
-                🎂 Specials
+                Specials
               </button>
               <button
                 onClick={() => scrollToSection('skills')}
-                className={`chalk-text text-left transition-all duration-300 ${
+                className={`text-left transition-all duration-300 font-sans font-semibold ${
                   activeSection === 'skills' ? 'text-blush scale-105' : 'text-espresso hover:text-blush'
                 }`}
               >
-                ⚡ Brew Station
+                Brew Station
               </button>
               <button
                 onClick={() => scrollToSection('about')}
-                className={`chalk-text text-left transition-all duration-300 ${
+                className={`text-left transition-all duration-300 font-sans font-semibold ${
                   activeSection === 'about' ? 'text-blush scale-105' : 'text-espresso hover:text-blush'
                 }`}
               >
-                📖 Our Story
+                Our Story
               </button>
               <button
                 onClick={() => scrollToSection('contact')}
-                className={`chalk-text text-left transition-all duration-300 ${
+                className={`text-left transition-all duration-300 font-sans font-semibold ${
                   activeSection === 'contact' ? 'text-blush scale-105' : 'text-espresso hover:text-blush'
                 }`}
               >
-                📞 Order Here
+                Order Here
               </button>
             </div>
           </div>
