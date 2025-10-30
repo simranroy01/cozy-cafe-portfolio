@@ -227,8 +227,8 @@ export const PERSONALITY_TRAITS = [
 
 export const SOCIAL_LINKS = [
   { name: 'GitHub', emoji: '🐙', url: 'https://github.com/simranroy01' },
-  { name: 'LinkedIn', emoji: '💼', url: 'https://www.linkedin.com/in/simran-roy-/' },
-  { name: 'Email', emoji: '📧', url: 'mailto:simranroy01@gmail.com' },
+  { name: 'LinkedIn', emoji: '💼', url: 'https://www.linkedin.com/in/simran-roy-437788270/' },
+  { name: 'Email', emoji: '📧', url: 'mailto:simranroy.186@gmail.com' },
 ];
 
 export const NAVIGATION_SECTIONS = [
