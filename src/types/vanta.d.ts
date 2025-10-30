@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 declare module 'vanta/dist/vanta.waves.min' {
   interface VantaOptions {
     el: HTMLElement;
@@ -10,7 +12,7 @@ declare module 'vanta/dist/vanta.waves.min' {
     waveHeight?: number;
     waveSpeed?: number;
     zoom?: number;
-    THREE?: any;
+    THREE?: typeof THREE;
   }
 
   interface VantaEffect {

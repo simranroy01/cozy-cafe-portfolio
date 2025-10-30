@@ -1,5 +1,6 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { PROJECTS } from '@/lib/constants';
 import { Project } from '@/types';
 import Spline from '@splinetool/react-spline';
@@ -25,13 +26,14 @@ export default function ProjectsSection() {
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -135,10 +137,12 @@ export default function ProjectsSection() {
                 <h4 className="text-lg font-semibold text-coffee mb-2">Project Images:</h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {selectedProject.images.map((image, index) => (
-                    <img
+                    <Image
                       key={index}
                       src={image}
                       alt={`${selectedProject.title} screenshot ${index + 1}`}
+                      width={300}
+                      height={200}
                       className="rounded-lg shadow-md border-2 border-wood"
                     />
                   ))}

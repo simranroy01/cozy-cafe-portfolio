@@ -2,6 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,7 +43,7 @@ export default function Navigation() {
       <div className="hidden md:block bg-coffee px-8 h-16 shadow-2xl rounded-b-lg">
         <div className="flex justify-between items-center h-full">
           <div className="flex items-center gap-4">
-            <img src="/coffee-logo.png" alt="Coffee Logo" className="h-12 w-12 shadow-md" />
+            <Image src="/coffee-logo.png" alt="Coffee Logo" width={48} height={48} className="shadow-md" />
             <div className="font-bold text-white text-xl drop-shadow-lg">Cozy Code Cafe</div>
           </div>
           <div className="flex gap-8 text-lg font-bold h-full">

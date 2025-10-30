@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 // TypeScript type definitions for the Cozy Code Cafe portfolio
 
 export interface Project {
@@ -58,6 +60,6 @@ export interface CafeColors {
 // Global THREE.js declaration for Vanta
 declare global {
   interface Window {
-    THREE: any;
+    THREE: typeof THREE;
   }
 }
