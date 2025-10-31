@@ -195,7 +195,7 @@ export const TIMELINE_EVENTS = [
   {
     year: '2020',
     title: 'The First Brew',
-    description: 'Discovered coding with HTML, CSS, and JavaScript in 11th grade. My love for interactive designs began here.',
+    description: 'Discovered coding with HTML, CSS, and JavaScript in 11th grade.',
   },
   {
     year: '2022',
