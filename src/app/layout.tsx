@@ -14,12 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cozy Code Cafe - Full-Stack Developer Portfolio",
+  title: "Simran | Portfolio",
   description: "Welcome to my cozy corner of the internet! I craft digital experiences that are as delightful as your favorite coffee shop visit.",
   keywords: "full-stack developer, portfolio, react, next.js, web development, coffee, cafe",
-  authors: [{ name: "Your Name" }],
+  authors: [{ name: "Simarn" }],
   openGraph: {
-    title: "Cozy Code Cafe - Full-Stack Developer Portfolio",
+    title: "Simran | Portfolio",
     description: "Welcome to my cozy corner of the internet! I craft digital experiences that are as delightful as your favorite coffee shop visit.",
     type: "website",
   },
